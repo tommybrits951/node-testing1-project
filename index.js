@@ -143,8 +143,17 @@ class Car {
    * focus.drive(200) // returns 600 (ran out of gas after 100 miles)
    */
   drive(distance) {
-    this.odometer = this.odometer + distance
-    return this.odometer
+    const milesCan = this.tank * this.mpg
+    if (distance <= milesCan) {
+      this.odometer = this.odometer + distance
+      this.tank = this.tank - (distance / this.mpg)
+      return this.odometer
+    } else {
+      this.odometer = this.odometer + milesCan
+      this.tank = 0
+      return this.odometer
+    }
+
   }
 
   /**
